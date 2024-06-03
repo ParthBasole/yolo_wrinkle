@@ -7,10 +7,6 @@ class WrinkleDetector:
         print(weights_path)
         print(source)
         print(name)
-        parser = argparse.ArgumentParser(description='Wrinkle Detection Tool')
-        args = parser.parse_args()
-        print(**vars(args))
-        opt = parse_opt()
         run_default(source,weights_path,name)
 
 def main():
