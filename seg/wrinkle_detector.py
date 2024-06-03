@@ -1,14 +1,11 @@
 import argparse
 
-from segment.predict import run_default
+from segment.predict import run_default,run
 
 class WrinkleDetector:
     @staticmethod
     def get_wrinkles(source, weights_path,name):
-        print(weights_path)
-        print(source)
-        print(name)
-        run_default(source,weights_path,name)
+        run(source,weights_path,name)
 
 def main():
     parser = argparse.ArgumentParser(description='Wrinkle Detection Tool')
