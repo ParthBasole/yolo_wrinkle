@@ -215,6 +215,7 @@ def run(
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
 
 def run_default(source,weights_path,name):
+    opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # expand
     run(source=source,
         weights=weights_path,
         name=name,
@@ -227,7 +228,7 @@ def run_default(source,weights_path,name):
         line_thickness= 3,
         hide_labels= False,
         hide_conf= False,
-        imgsz=[640]
+        imgsz=[640,640]
         )
 
 
