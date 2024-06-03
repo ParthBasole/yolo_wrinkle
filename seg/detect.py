@@ -103,7 +103,7 @@ def run(
         bs = len(dataset)  # batch_size
     else:
         file_extension = source.split(".")[-1]
-        single_mode = IMG_FORMATS.contains(f/ile_extensio)n
+        single_mode = IMG_FORMATS.contains(file_extension)
         if file_extension:
             dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)
             
