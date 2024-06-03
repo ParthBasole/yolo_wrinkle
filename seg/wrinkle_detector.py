@@ -4,6 +4,9 @@ from detect import run
 class WrinkleDetector:
     @staticmethod
     def get_wrinkles(source, weights_path,name):
+        print(weights_path)
+        print(source)
+        print(name)
         run(source=source, weights=weights_path,name=name)
 
 def main():
