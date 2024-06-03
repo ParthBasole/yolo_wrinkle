@@ -225,7 +225,7 @@ def run(
     # update model (to fix SourceChangeWarning)
 
 def run_default(source,weights_path,name):
-    run(source=source,
+    return run(source=source,
         weights=weights_path,
         name=name,
         data=ROOT / 'data/coco128.yaml',

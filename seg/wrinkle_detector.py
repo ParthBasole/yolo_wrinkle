@@ -5,7 +5,7 @@ from segment.predict import run_default,run
 class WrinkleDetector:
     @staticmethod
     def get_wrinkles(source, weights_path,name):
-        run_default(source,weights_path,name)
+        return run_default(source,weights_path,name)
 
 def main():
     parser = argparse.ArgumentParser(description='Wrinkle Detection Tool')
@@ -14,7 +14,7 @@ def main():
     parser.add_argument('--name', type=str, help='Model Name')
     args = parser.parse_args()
 
-    WrinkleDetector.get_wrinkles(args.source, args.weights_path,args.name)
+    print(WrinkleDetector.get_wrinkles(args.source, args.weights_path,args.name))
 
 if __name__ == "__main__":
     main()
