@@ -111,6 +111,7 @@ def run(
     # Run inference
     model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
     seen, windows, dt = 0, [], (Profile(), Profile(), Profile())
+    print("XUZZ Run iunf")
     for path, im, im0s, vid_cap, s in dataset:
         with dt[0]:
             im = torch.from_numpy(im).to(device)
@@ -121,6 +122,7 @@ def run(
 
         # Inference
         with dt[1]:
+            print("Inference")
             
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred, out = model(im, augment=augment, visualize=visualize)
@@ -128,6 +130,7 @@ def run(
 
         # NMS
         with dt[2]:
+            print("NMS")
             pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det, nm=32)
 
         # Second-stage classifier (optional)
