@@ -103,10 +103,10 @@ def run(
         bs = len(dataset)  # batch_size
     else:
         file_extension = source.split(".")[-1].lower()
-        if file_extension in IMG_FORMATS:
-            dataset = LoadSingleImage(source, img_size=imgsz, stride=stride, auto=pt)
-        else:
-            dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)    
+        # if file_extension in IMG_FORMATS:
+        #     dataset = LoadSingleImage(source, img_size=imgsz, stride=stride, auto=pt)
+        # else:
+        dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)    
         bs = 1  # batch_size
     vid_path, vid_writer = [None] * bs, [None] * bs
 
