@@ -8,9 +8,9 @@ class WrinkleDetector:
 
 def main():
     parser = argparse.ArgumentParser(description='Wrinkle Detection Tool')
-    parser.add_argument('source', type=str, help='Path to the image or video for wrinkle detection')
-    parser.add_argument('weights_path', type=str, help='Path to the weights file for the detection model')
-    parser.add_argument('name', type=str, help='Model Name')
+    parser.add_argument('--source', type=str, help='Path to the image or video for wrinkle detection')
+    parser.add_argument('--weights_path', type=str, help='Path to the weights file for the detection model')
+    parser.add_argument('--name', type=str, help='Model Name')
 
     args = parser.parse_args()
 
