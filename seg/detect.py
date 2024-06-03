@@ -226,7 +226,7 @@ def run_default(source,weights_path,name):
         project=ROOT / 'runs/detect',
         line_thickness= 3,
         hide_labels= False,
-        hide_conf= False
+        hide_conf= False,
         imgsz=[640]
         )
 
