@@ -126,7 +126,7 @@ def run(
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred = model(im, augment=augment, visualize=visualize)
             
-            print(pred)
+            print(pred.shape)
 
         # NMS
         with dt[2]:
