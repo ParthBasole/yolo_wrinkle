@@ -1,6 +1,6 @@
 import argparse
 
-from seg.segment.predict import run_default
+from segment.predict import run_default
 
 class WrinkleDetector:
     @staticmethod
