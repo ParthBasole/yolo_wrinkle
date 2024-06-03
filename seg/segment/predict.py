@@ -124,12 +124,15 @@ def run(
 
         # Inference
         with dt[1]:
+            print("Inference")
+            
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred, out = model(im, augment=augment, visualize=visualize)
             proto = out[1]
 
         # NMS
         with dt[2]:
+            print("NMS")
             pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det, nm=32)
 
         # Second-stage classifier (optional)

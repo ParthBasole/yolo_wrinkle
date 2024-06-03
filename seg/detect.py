@@ -113,7 +113,6 @@ def run(
     # Run inference
     model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
     seen, windows, dt = 0, [], (Profile(), Profile(), Profile())
-    print("xyzzs")
     for path, im, im0s, vid_cap, s in dataset:
         with dt[0]:
             im = torch.from_numpy(im).to(device)
@@ -228,7 +227,7 @@ def run_default(source,weights_path,name):
         line_thickness= 3,
         hide_labels= False,
         hide_conf= False,
-        imgsz=[640,640]
+        imgsz=(640,640)
         )
 
 
