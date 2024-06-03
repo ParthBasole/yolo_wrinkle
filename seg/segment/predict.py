@@ -227,6 +227,21 @@ def run(
     if update:
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
 
+def run_default(source,weights_path,name):
+    run(source=source,
+        weights=weights_path,
+        name=name,
+        data=ROOT / 'data/coco128.yaml',
+        conf_thres= 0.25,
+        iou_thres= 0.45,
+        max_det= 1000,
+        device='',
+        project=ROOT / 'runs/detect',
+        line_thickness= 3,
+        hide_labels= False,
+        hide_conf= False,
+        imgsz=(640,640)
+        )
 
 def parse_opt():
     parser = argparse.ArgumentParser()
