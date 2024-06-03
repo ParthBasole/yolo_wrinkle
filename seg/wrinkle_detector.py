@@ -18,7 +18,7 @@ def main():
     parser.add_argument('--weights_path', type=str, help='Path to the weights file for the detection model')
     parser.add_argument('--name', type=str, help='Model Name')
 
-
+    args = parser.parse_args()
 
     WrinkleDetector.get_wrinkles(args.source, args.weights_path,args.name)
 
