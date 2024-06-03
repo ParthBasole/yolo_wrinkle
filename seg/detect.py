@@ -40,7 +40,7 @@ if str(ROOT) not in sys.path:
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 from models.common import DetectMultiBackend
-from utils.dataloaders import IMG_FORMATS, VID_FORMATS, LoadImages, LoadStreams
+from utils.dataloaders import IMG_FORMATS, VID_FORMATS, LoadImages, LoadStreams, LoadSingleImage
 from utils.general import (LOGGER, Profile, check_file, check_img_size, check_imshow, check_requirements, colorstr, cv2,
                            increment_path, non_max_suppression, print_args, scale_coords, strip_optimizer, xyxy2xywh)
 from utils.plots import Annotator, colors, save_one_box
@@ -102,13 +102,11 @@ def run(
         dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt)
         bs = len(dataset)  # batch_size
     else:
-        file_extension = source.split(".")[-1]
-        single_mode = IMG_FORMATS.contains(file_extension)
-        if file_extension:
-            dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)
-            
-
-        dataset = (source, img_size=imgsz, stride=stride, auto=pt)
+        file_extension = source.split(".")[-1].lower()
+        if file_extension in IMG_FORMATS:
+            dataset = LoadSingleImage(source, img_size=imgsz, stride=stride, auto=pt)
+        else:
+            dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt)    
         bs = 1  # batch_size
     vid_path, vid_writer = [None] * bs, [None] * bs
 
