@@ -96,6 +96,7 @@ def run(
     model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
     stride, names, pt = model.stride, model.names, model.pt
     imgsz = check_img_size(imgsz, s=stride)  # check image size
+    paths_saved = []
 
     # Dataloader
     if webcam:
@@ -111,7 +112,6 @@ def run(
     # Run inference
     model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
     seen, windows, dt = 0, [], (Profile(), Profile(), Profile())
-    print("XUZZ Run iunf")
     for path, im, im0s, vid_cap, s in dataset:
         with dt[0]:
             im = torch.from_numpy(im).to(device)
@@ -121,21 +121,17 @@ def run(
                 im = im[None]  # expand for batch dim
 
         # Inference
-        with dt[1]:
-            print("Inference")
-            
+        with dt[1]: 
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred, out = model(im, augment=augment, visualize=visualize)
             proto = out[1]
 
         # NMS
         with dt[2]:
-            print("NMS")
             pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det, nm=32)
 
         # Second-stage classifier (optional)
         # pred = utils.general.apply_classifier(pred, classifier_model, im, im0s)
-
         # Process predictions
         for i, det in enumerate(pred):  # per image
             seen += 1
@@ -195,6 +191,7 @@ def run(
                 cv2.waitKey(1)  # 1 millisecond
 
             # Save results (image with detections)
+            paths_saved.append(save_path)
             if save_img:
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
@@ -223,7 +220,9 @@ def run(
         s = f"\n{len(list(save_dir.glob('labels/*.txt')))} labels saved to {save_dir / 'labels'}" if save_txt else ''
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
-        strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
+        strip_optimizer(weights[0])
+    return paths_saved
+    # update model (to fix SourceChangeWarning)
 
 def run_default(source,weights_path,name):
     run(source=source,
